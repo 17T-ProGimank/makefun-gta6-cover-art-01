@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Vice Cover Studio — GTA 6-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app" id="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">NV</span> Neon Vice <em>Cover Studio</em></div>
+    <p class="tagline">Your photo + a caption, turned into GTA-style cover art. Photos never leave this machine.</p>
+  </header>
+
+  <section class="workspace">
+    <div class="stage-wrap">
+      <canvas id="stage" width="1080" height="1080" aria-label="Cover preview"></canvas>
+      <p class="hint" id="hint">Click a panel to select it, drag to move its photo, scroll or use the zoom slider to zoom.</p>
+      <p id="shot-status" role="status"></p>
+    </div>
+
+    <aside class="panel" id="controls">
+      <section class="group">
+        <h2>1 · Photos</h2>
+        <label class="file-btn">Upload photos <input id="upload" type="file" accept="image/*" multiple></label>
+        <div class="thumbs" id="thumbs" aria-label="Available photos"></div>
+        <p class="note">Click a thumbnail to put that photo in the selected panel. One photo can fill several panels.</p>
+      </section>
+
+      <section class="group">
+        <h2>2 · Layout</h2>
+        <div class="choices" id="layouts">
+          <button type="button" data-layout="hero" class="choice is-active">Hero + 3</button>
+          <button type="button" data-layout="grid" class="choice">Four grid</button>
+          <button type="button" data-layout="triptych" class="choice">Triptych</button>
+          <button type="button" data-layout="bleed" class="choice">Full bleed</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h2>3 · Colour grade</h2>
+        <div class="choices" id="grades">
+          <button type="button" data-grade="sunset" class="choice is-active">Vice Sunset</button>
+          <button type="button" data-grade="neon" class="choice">Neon Night</button>
+          <button type="button" data-grade="gold" class="choice">Palm Gold</button>
+          <button type="button" data-grade="dusk" class="choice">Ocean Dusk</button>
+          <button type="button" data-grade="noir" class="choice">Noir</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h2>4 · Caption</h2>
+        <label>Title <input id="title" type="text" maxlength="24" value="NEON SHORE"></label>
+        <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="a sunset heist on the neon coast"></label>
+      </section>
+
+      <section class="group">
+        <h2>5 · Selected panel</h2>
+        <label>Zoom <input id="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+        <div class="row">
+          <button id="fill" type="button">Fill all panels</button>
+          <button id="reset-pan" type="button">Centre photo</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h2>6 · Export</h2>
+        <div class="choices" id="sizes">
+          <button type="button" data-size="square" class="choice is-active">Square · 1080 × 1080</button>
+          <button type="button" data-size="portrait" class="choice">Story · 1080 × 1350</button>
+          <button type="button" data-size="wide" class="choice">Wide · 1920 × 1080</button>
+        </div>
+        <button id="export" type="button" class="export-btn">Export PNG</button>
+        <p id="status" role="status"></p>
+      </section>
+    </aside>
+  </section>
+
+  <footer class="foot">
+    <p>Neon Vice Cover Studio — an original cover maker. No Rockstar Games logo, artwork or font; lettering set in Anton and Pacifico under the SIL Open Font License. Sample photos: two made for make.fun, two drawn by the app's maker.</p>
+  </footer>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
