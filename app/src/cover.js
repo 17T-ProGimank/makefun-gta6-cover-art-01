@@ -277,10 +277,13 @@
     // The first preview can paint before the vendored fonts finish loading
     // (fallback type for a frame). Repaint once fonts are ready so the live
     // preview always shows the real Anton/Pacifico lettering.
+    // NOTE: the repaint flag must stay set after the first repaint. Resetting
+    // it inside the .then() callback re-attaches a new .then() on every
+    // render, and document.fonts.ready stays resolved, so the page would
+    // spin in an endless microtask loop and freeze the renderer.
     if (typeof document !== 'undefined' && document.fonts && document.fonts.ready && !render._fontRepaint) {
       render._fontRepaint = true;
       document.fonts.ready.then(function () {
-        render._fontRepaint = false;
         render(canvas, photo, opts || {});
       });
     }
